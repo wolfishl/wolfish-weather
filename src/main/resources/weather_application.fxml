@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<GridPane fx:controller="wolfish.weather.WeatherController"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+
+    <padding>
+        <Insets top="25" right="25" bottom="10" left="25"/>
+    </padding>
+
+    <Label fx:id="locationLabel" text="Location:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+    <TextField fx:id="locationTextField" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+    <Button fx:id="search" text="Search" GridPane.columnIndex="6" GridPane.rowIndex="0" onAction="#search"/>
+    <RadioButton fx:id="farenheit" text="Farenheit" GridPane.columnIndex="8" GridPane.rowIndex="0" />
+    <RadioButton fx:id="celsius" text="Celsius" GridPane.columnIndex="10" GridPane.rowIndex="0" />
+
+    <!-- Day labels -->
+
+    <Label fx:id="today" text="" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+    <Label fx:id="tomorrow" text="" GridPane.columnIndex="4" GridPane.rowIndex="2"/>
+    <Label fx:id="day2" text="" GridPane.columnIndex="6" GridPane.rowIndex="2"/>
+    <Label fx:id="day3" text="" GridPane.columnIndex="8" GridPane.rowIndex="2"/>
+    <Label fx:id="day4" text="" GridPane.columnIndex="10" GridPane.rowIndex="2"/>
+
+    <!-- Temp labels -->
+
+    <Label fx:id="todayTemp" text="" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+    <Label fx:id="tomorrowTemp" text="" GridPane.columnIndex="4" GridPane.rowIndex="4"/>
+    <Label fx:id="day2Temp" text="" GridPane.columnIndex="6" GridPane.rowIndex="4"/>
+    <Label fx:id="day3Temp" text="" GridPane.columnIndex="8" GridPane.rowIndex="4"/>
+    <Label fx:id="day4Temp" text="" GridPane.columnIndex="10" GridPane.rowIndex="4"/>
+
+    <!--    icons-->
+
+
+
+</GridPane>
