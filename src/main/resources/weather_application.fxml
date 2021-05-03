@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
 <GridPane fx:controller="wolfish.weather.WeatherController"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
 
@@ -38,6 +39,40 @@
 
     <!--    icons-->
 
+    <ImageView fx:id="todayImage" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+    <ImageView fx:id="tomorrowImage" GridPane.columnIndex="4" GridPane.rowIndex="6"/>
+    <ImageView fx:id="day2Image" GridPane.columnIndex="6" GridPane.rowIndex="6"/>
+    <ImageView fx:id="day3Image" GridPane.columnIndex="8" GridPane.rowIndex="6"/>
+    <ImageView fx:id="day4Image" GridPane.columnIndex="10" GridPane.rowIndex="6"/>
 
+    <fx:define>
+        <ArrayList fx:id="days" >
+            <fx:reference source="today"/>
+            <fx:reference source="tomorrow"/>
+            <fx:reference source="day2"/>
+            <fx:reference source="day3"/>
+            <fx:reference source="day4"/>
+        </ArrayList>
+    </fx:define>
+
+    <fx:define>
+        <ArrayList fx:id="temperature" >
+            <fx:reference source="todayTemp"/>
+            <fx:reference source="tomorrowTemp"/>
+            <fx:reference source="day2Temp"/>
+            <fx:reference source="day3Temp"/>
+            <fx:reference source="day4Temp"/>
+        </ArrayList>
+    </fx:define>
+
+    <fx:define>
+        <ArrayList fx:id="images" >
+            <fx:reference source="todayImage"/>
+            <fx:reference source="tomorrowImage"/>
+            <fx:reference source="day2Image"/>
+            <fx:reference source="day3Image"/>
+            <fx:reference source="day4Image"/>
+        </ArrayList>
+    </fx:define>
 
 </GridPane>
