@@ -71,7 +71,20 @@ public class WeatherControllerTest {
         verify(controller.farenheit).setSelected(true);
     }
 
-    //This test is incomplete...
+    @Test
+    public void search()
+    {
+        //given
+        WeatherController controller = givenWeatherController();
+
+        //when
+        controller.search(mock(ActionEvent.class));
+
+        //then
+        verify(controller.locationTextField).getText();
+        verify(controller.celsius).isSelected();
+    }
+
     @Test
     public void settingGUI()
     {
@@ -80,32 +93,35 @@ public class WeatherControllerTest {
         OpenWeatherMapForecast forecast = mock(OpenWeatherMapForecast.class);
         OpenWeatherMapForecast.HourlyForecast hourly = mock(OpenWeatherMapForecast.HourlyForecast.class);
         doReturn(hourly).when(forecast).getForcastFor(anyInt());
+        OpenWeatherMapForecast.HourlyForecast.Main main = mock(OpenWeatherMapForecast.HourlyForecast.Main.class);
         List<OpenWeatherMapForecast.HourlyForecast.Weather> weather =
                 Arrays.asList(
                         mock(OpenWeatherMapForecast.HourlyForecast.Weather.class),
                         mock(OpenWeatherMapForecast.HourlyForecast.Weather.class),
                         mock(OpenWeatherMapForecast.HourlyForecast.Weather.class)
                 );
-        //doReturn(weather).when(hourly).get(anyIn);
         doReturn(date).when(hourly).getDate();
-        String url = "http://openweathermap.org/img/wn/100@2x.png";
-        doReturn(url).when(weather.get(anyInt())).getIconUrl();
+        hourly.weather = weather;
+        hourly.main = main;
+        main.temp = 50.0;
+        doReturn("http://openweathermap.org/img/wn/100@2x.png").when(hourly.weather.get(0)).getIconUrl();
 
         //when
         controller.settingGUI(forecast);
 
         //then
+
         for(Label label : controller.days)
         {
             verify(label, times(1)).setText(date + "");
         }
         for (Label label : controller.temperature)
         {
-            ;
+            verify(label, times(1)).setText("50.0");
         }
         for (ImageView image : images)
         {
-            verify(image, times(1)).setImage(new Image("http://openweathermap.org/img/wn/100@2x.png"));
+            verify(image, times(1)).setImage(any(Image.class));
         }
     }
 
