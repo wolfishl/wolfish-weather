@@ -1,3 +1,5 @@
+package wolfish.weather;
+
 import io.reactivex.rxjava3.core.Single;
 import org.junit.Test;
 import wolfish.weather.OpenWeatherMapFeed;

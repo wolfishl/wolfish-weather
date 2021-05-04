@@ -22,20 +22,19 @@ public class WeatherController {
     @FXML
     TextField locationTextField;
     @FXML
-    private List<Label> days;
+    List<Label> days;
     @FXML
     RadioButton farenheit;
     @FXML
     RadioButton celsius;
     @FXML
-    private List<Label> temperature;
+    List<Label> temperature;
+    @FXML
+    List<ImageView> images;
+
 
     @FXML
-    private List<ImageView> images;
-
-
-    @FXML
-    private void initialize() {
+    public void initialize() {
         ToggleGroup group = new ToggleGroup();
         farenheit.setToggleGroup(group);
         celsius.setToggleGroup(group);
@@ -64,15 +63,19 @@ public class WeatherController {
     {
         Platform.runLater(new Runnable() {
             @Override public void run() {
-
-                for (int index = 0; index < days.size(); index++)
-                {
-                    days.get(index).setText(forecast.getForcastFor(index).getDate() + "");
-                    temperature.get(index).setText(forecast.getForcastFor(index).main.temp + "");
-                    images.get(index).setImage(new Image(forecast.getForcastFor(index).weather.get(0).getIconUrl()));
-                }
+                settingGUI(forecast);
             }
         });
+    }
+
+    public void settingGUI(OpenWeatherMapForecast forecast)
+    {
+        for (int index = 0; index < days.size(); index++)
+        {
+            days.get(index).setText(forecast.getForcastFor(index).getDate() + "");
+            temperature.get(index).setText(forecast.getForcastFor(index).main.temp + "");
+            images.get(index).setImage(new Image(forecast.getForcastFor(index).weather.get(0).getIconUrl()));
+        }
     }
 
     public void onError(Throwable throwable)
