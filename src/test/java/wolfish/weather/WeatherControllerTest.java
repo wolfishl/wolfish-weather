@@ -1,5 +1,6 @@
 package wolfish.weather;
 
+import io.reactivex.rxjava3.core.Single;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -31,7 +32,9 @@ public class WeatherControllerTest {
 
     public WeatherController givenWeatherController()
     {
-        WeatherController controller = new WeatherController();
+        OpenWeatherMapService service = mock(OpenWeatherMapService.class);
+        WeatherController controller = new WeatherController(service);
+//        WeatherController controller = new WeatherController();
         controller.farenheit = mock(RadioButton.class);
         controller.celsius = mock(RadioButton.class);
         controller.locationTextField = mock(TextField.class);
@@ -76,6 +79,9 @@ public class WeatherControllerTest {
     {
         //given
         WeatherController controller = givenWeatherController();
+        doReturn("New York").when(controller.locationTextField).getText();
+        doReturn(false).when(controller.celsius).isSelected();
+        doReturn(Single.never()).when(controller.service).getWeatherForecast("New York", "imperial");
 
         //when
         controller.search(mock(ActionEvent.class));
@@ -83,6 +89,7 @@ public class WeatherControllerTest {
         //then
         verify(controller.locationTextField).getText();
         verify(controller.celsius).isSelected();
+        verify(controller.service).getWeatherForecast("New York", "imperial");
     }
 
     @Test

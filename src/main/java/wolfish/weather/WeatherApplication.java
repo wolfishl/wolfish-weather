@@ -17,7 +17,14 @@ public class WeatherApplication extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/weather_application.fxml"));
+
+        OpenWeatherMapService service = new OpenWeatherMapServiceFactory().newInstance();
+        WeatherController controller = new WeatherController(service);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/weather_application.fxml"));
+        loader.setController(controller);
+
+        Parent root = loader.load();
 
         Scene scene = new Scene(root, 900, 600);
 

@@ -19,6 +19,7 @@ import wolfish.weather.OpenWeatherMapServiceFactory;
 import java.util.List;
 
 public class WeatherController {
+
     @FXML
     TextField locationTextField;
     @FXML
@@ -31,6 +32,13 @@ public class WeatherController {
     List<Label> temperature;
     @FXML
     List<ImageView> images;
+
+    OpenWeatherMapService service;
+
+    public WeatherController(OpenWeatherMapService service)
+    {
+        this.service = service;
+    }
 
 
     @FXML
@@ -48,8 +56,8 @@ public class WeatherController {
         String location = locationTextField.getText();
         String units = celsius.isSelected() ? "metric" : "imperial";
 
-        OpenWeatherMapServiceFactory factory = new OpenWeatherMapServiceFactory();
-        OpenWeatherMapService service = factory.newInstance();
+//        OpenWeatherMapServiceFactory factory = new OpenWeatherMapServiceFactory();
+//        OpenWeatherMapService service = factory.newInstance();
 
         Disposable disposableForecast = service.getWeatherForecast(location, units)
                 .subscribeOn((Schedulers.io()))
@@ -80,7 +88,7 @@ public class WeatherController {
 
     public void onError(Throwable throwable)
     {
-        System.out.println("Error occured");
+        throwable.printStackTrace();
     }
 
 }
